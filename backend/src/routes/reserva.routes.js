@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
 
-const {getAll,create,getById,update,deleteOne} = require('../controllers/reserva.controller');
+const {getAll,create,getById,update,deleteOne} = require('../controllers/reserva.controllers');
 
 router.route('/')
       .get(getAll)

@@ -20,9 +20,11 @@ app.get('/',(req,res)=>{
 
 //rutas
 
-app.use('/reserva',require('./routes/reserva.router'));
-app.use('/platos',require('./routes/plato.route'));
-app.use('/pedidos',require('./routes/pedido.route'))
+app.use('/usuario',require('./routes/usuario.routes'));
+app.use('/auth',require('./routes/auth.routes'));
+app.use('/reserva',require('./routes/reserva.routes'));
+app.use('/platos',require('./routes/plato.routes'));
+app.use('/pedidos',require('./routes/pedido.routes'))
 
 //middlewares de errores
 
