@@ -3,7 +3,7 @@ const router = Router();
 
 const {verifyToken} = require('../middlewares/auth.handler');
 
-const {getAll,create,getById} = require('../controllers/usuario.controllers');
+const {getAll,create,getById,userRecoverPassword,userNewPassword} = require('../controllers/usuario.controllers');
 
 router.route('/')
     .get(getAll)
@@ -11,5 +11,11 @@ router.route('/')
 
 router.route('/:id')
     .get(verifyToken,getById)
+
+router.route('/recover-password')
+    .post(userRecoverPassword)
+
+router.route('/new-password/:id')
+    .post(userNewPassword)
 
 module.exports = router;

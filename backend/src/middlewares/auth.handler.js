@@ -9,7 +9,7 @@ function verifyToken(req,res,next){
         const token = bearer[1];
         console.log('token : ' + token);
         try {
-            const decoded = jwt.verify(token,TOKEN_SECRET);
+            const decoded = jwt.verify(token,process.env.TOKEN_SECRET);
             console.log(decoded);
         }catch(err){
             return res.status(401).json({
