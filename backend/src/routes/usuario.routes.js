@@ -18,4 +18,5 @@ router.route('/recover-password')
 router.route('/new-password/:id')
     .post(userNewPassword)
 
+
 module.exports = router;
