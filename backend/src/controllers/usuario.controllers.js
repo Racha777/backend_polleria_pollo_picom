@@ -104,8 +104,6 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         const { correo } = req.body;
         const user = await usuarioModel.findOne({ correo });
         if (user) {
-          user.token = user._id;
-          await user.save();
           const { usuario, correo, _id } = user;
           console.log(correo)
           passwordRecoveryEmail({
@@ -119,7 +117,7 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         }
 
         else {
-          const error = new Error('El usuario no existe');
+          const error = new Error('Correo inválido');
           return res.status(400).json({
             message: error.message
           });
@@ -139,27 +137,29 @@ usuarioController.userNewPassword = async (req, res) => {
 
         if (user!==null) {
           passwordEncriptado = await bcrypt.hash(password,10);
-          console.log("password encriptado : " + passwordEncriptado)
           user.password = passwordEncriptado;
           await user.save();
           return res.status(200).json({
             message: 'Nueva contraseña guardada'
           });
         } else {
-          const error = new Error('Id inválido');
+          const error = new Error('Faltan datos');
           return res.status(400).json({
             message: error.message
           });
         }
-    
       } 
       else{
-        console.log('invalido')
+        const error = new Error('Faltan datos');
+        return res.status(400).json({
+          message: error.message
+        });
       }
     
     } catch (error) {
         console.log('error'+error.message);
     }
   };
+
 
 module.exports = usuarioController;

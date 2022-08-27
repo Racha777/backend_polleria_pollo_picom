@@ -20,7 +20,7 @@ const passwordRecoveryEmail = async (user) => {
      html: `
        <p>Hola ${usuario}, solicitaste reestablecer tu password.</p>
        <p>Reestablece tu password en el siguiente enlace:</p>
-       <a href="http:localhost:3000/recover-password/${_id}">Reestablecer password</a>
+       <a href="http:localhost:3000/new-password/${_id}">Reestablecer password</a>
        <p>Si tú no lo solicitaste, ignora el mensaje.</p>
      `
    });
