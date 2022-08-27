@@ -2,13 +2,9 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const PedidoSchema=new Schema({
-    id:{
-        required:true,
-        type:Number
-    },
     fecha_registro:{
         required:true,
-        type:Date
+        type:String
     },
     monto_total:{
         required:true,
@@ -17,7 +13,7 @@ const PedidoSchema=new Schema({
     },
     cliente_id:{
         required:true,
-        type:Number
+        type:String
     },
     lista_platos:{
         required:true,

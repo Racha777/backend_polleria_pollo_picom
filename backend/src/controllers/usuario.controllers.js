@@ -58,7 +58,7 @@ usuarioController.create = async (req,res)=>{
     }
 }
 
-usuarioController.auth = async (req,res)=>{
+usuarioController.login = async (req,res)=>{
     try {
         const {usuario,password} = req.body
         const result = await usuarioModel.findOne({ usuario })
