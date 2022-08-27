@@ -72,7 +72,7 @@ usuarioController.login = async (req,res)=>{
         const token = jwt.sign({
             id:result._id,
             usuario:result.usuario
-        },process.env.TOKEN_SECRET)
+        },process.env.TOKEN_SECRET,{expiresIn:"7d"})
 
         if (!result) {
             res.status(400).json({
