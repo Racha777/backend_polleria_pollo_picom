@@ -2,10 +2,6 @@ const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
 const PedidoDetalleSchema=new Schema({
-    id:{
-        required:true,
-        type:Number
-    },
     plato_id:{
         required:true,
         type:Number
