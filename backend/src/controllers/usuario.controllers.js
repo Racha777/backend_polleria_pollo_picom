@@ -5,7 +5,6 @@ const passwordRecoveryEmail = require('../helpers/email')
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
 require('dotenv').config();
 
 usuarioController.getAll = async (req,res) =>{
@@ -73,7 +72,7 @@ usuarioController.login = async (req,res)=>{
         const token = jwt.sign({
             id:result._id,
             usuario:result.usuario
-        },process.env.TOKEN_SECRET)
+        },process.env.TOKEN_SECRET,{expiresIn:"7d"})
 
         if (!result) {
             res.status(400).json({
@@ -105,8 +104,6 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         const { correo } = req.body;
         const user = await usuarioModel.findOne({ correo });
         if (user) {
-          user.token = user._id;
-          await user.save();
           const { usuario, correo, _id } = user;
           console.log(correo)
           passwordRecoveryEmail({
@@ -120,7 +117,7 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         }
 
         else {
-          const error = new Error('El usuario no existe');
+          const error = new Error('Correo inválido');
           return res.status(400).json({
             message: error.message
           });
@@ -131,35 +128,38 @@ usuarioController.userRecoverPassword = async(req,res)=>{
 }
 usuarioController.userNewPassword = async (req, res) => {
     try {
-       id = req.params.id;
-     
+      const {id} = req.params;
+      if(mongoose.Types.ObjectId.isValid(id)) {
+        console.log('valido')
+        const user = await usuarioModel.findById(id);
+         console.log(user)
         const { password } = req.body;
-        const user = await usuarioModel.findById({'_id':id},(error,data)=>{
-          if(error){
-            console.log(error)
-          }
-          else{
-            console.log(data)
-          }
-        })
-       console.log(user)
-      if (user) {
-        passwordEncriptado = await bcrypt.hash(password,10);
-        console.log("password encriptado : " + passwordEncriptado)
-        user.password = passwordEncriptado;
-        await user.save();
-        return res.status(200).json({
-          message: 'Nueva contraseña guardada'
-        });
-      } else {
-        const error = new Error('Id inválido');
+
+        if (user!==null) {
+          passwordEncriptado = await bcrypt.hash(password,10);
+          user.password = passwordEncriptado;
+          await user.save();
+          return res.status(200).json({
+            message: 'Nueva contraseña guardada'
+          });
+        } else {
+          const error = new Error('Faltan datos');
+          return res.status(400).json({
+            message: error.message
+          });
+        }
+      } 
+      else{
+        const error = new Error('Faltan datos');
         return res.status(400).json({
           message: error.message
         });
       }
+    
     } catch (error) {
-        console.log(error.message);
+        console.log('error'+error.message);
     }
   };
+
 
 module.exports = usuarioController;

@@ -2,6 +2,17 @@ const pedidoController={};
 
 const pedidoModel=require('../models/pedido.model');
 
+pedidoController.getByClient=async(req,res)=>{
+    idCliente=req.params.cliente_id;
+    const query={"cliente_id":idCliente};
+    const pedidos=await pedidoModel.find(query);
+    console.log(pedidos);
+    res.json({
+        status:true,
+        content:pedidos
+    })
+}
+
 pedidoController.create=async (req,res)=>{
     try{
         const {id,fecha_registro,cliente_id,lista_platos}=req.body;
