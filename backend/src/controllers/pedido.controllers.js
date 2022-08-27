@@ -13,7 +13,6 @@ pedidoController.create=async (req,res)=>{
         });
         console.log(monto_total);
         const nuevoPedido=new pedidoModel({
-            id,
             fecha_registro,
             monto_total,
             cliente_id,
