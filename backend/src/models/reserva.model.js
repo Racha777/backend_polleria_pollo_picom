@@ -14,6 +14,10 @@ const ReservaSchema = new Schema({
         minlength:8,
         maxlength:8
     },
+    correo:{
+        type:String,
+        required:true,
+    },
     fecha:{
         type:String,
         required:true,

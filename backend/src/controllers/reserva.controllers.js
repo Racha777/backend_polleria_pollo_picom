@@ -1,5 +1,6 @@
 const reservaController = {};
 
+const { reservaConfirmedEmail } = require('../helpers/email');
 const reservaModel = require('../models/reserva.model');
 
 
@@ -14,6 +15,7 @@ reservaController.getAll = async (req,res) =>{
 reservaController.create = async (req,res) =>{
     
     try{
+    console.log(req.body)
      const nuevaReserva = new reservaModel(req.body)
      await nuevaReserva.save();
      res.json({
@@ -64,5 +66,38 @@ reservaController.deleteOne = async (req,res) =>{
         }
     })
 }
- 
+
+reservaController.reservaConfirmed = async (req,res)=>{
+
+    try{
+        const {solicitante,dni,correo,fecha,hora,motivo} = req.body
+        const dniValid = await reservaModel.findOne({ dni });
+        if(dniValid){
+            reservaConfirmedEmail({
+                solicitante,
+                dni,
+                correo,
+                fecha,
+                hora,
+                motivo
+              });
+              return res.status(200).json({
+                message: 'Reserva Confirmada'
+              });
+        }
+        else {
+            const error = new Error('Contactarse con soporte');
+            return res.status(400).json({
+              message: error.message
+            });
+          }
+        
+    }
+    catch(error){
+        console.log(error.message);
+    }
+    
+    
+}
+
 module.exports = reservaController;
