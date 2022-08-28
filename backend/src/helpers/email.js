@@ -46,9 +46,9 @@ const passwordRecoveryEmail = async (user) => {
     subject: 'Reserva',
     text: 'Reserva tu local',
     html: `
-      <p>Hola soy ${solicitante}, identificado con el dni ${dni},
+      <p>Hola soy ${solicitante}, identificado con dni ${dni},
        quiero realizar una reserva el día ${fecha} a las ${hora},
-       por el motivo de ${motivo}</p>
+       por el motivo de ${motivo}.</p>
     `
   });
 };
@@ -101,7 +101,7 @@ const reclamoConfirmedEmail = async (reclamo)=>{
     text: 'Reclamo',
     html: `
       <p>${dataReclamo} <br/> <br/>
-      Mis datos <br/>
+      Mis datos <br/> <br/>
       Nombre: ${nombre}<br/>
       Apellido: ${apellido}<br/>
       Celular: ${celular}<br/>
