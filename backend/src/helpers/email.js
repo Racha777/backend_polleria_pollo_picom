@@ -72,12 +72,11 @@ const contactoConfirmedEmail = async (contacto)=>{
     subject: 'Contacto',
     text: 'Contacto con el admin',
     html: `
-      <p>${dataContacto} <br/> <br/>
-      Adjunto mis datos <br/>
-      Nombre: ${nombre}<br/>
+      <p>${dataContacto}.</p>
+      <p>Adjunto mis datos:</p>
+      <p>Nombre: ${nombre}<br/>
       Apellido: ${apellido}<br/>
-      Celular: ${celular}<br/>
-      </p>
+      Celular: ${celular}<br/></p>
     `
   });
 };
@@ -100,13 +99,12 @@ const reclamoConfirmedEmail = async (reclamo)=>{
     subject: 'Reclamo',
     text: 'Reclamo',
     html: `
-      <p>${dataReclamo} <br/> <br/>
-      Mis datos <br/> <br/>
-      Nombre: ${nombre}<br/>
+      <p>${dataReclamo}.</p>
+      <p>Mis datos:</p>
+      <p>Nombre: ${nombre}<br/>
       Apellido: ${apellido}<br/>
       Celular: ${celular}<br/>
-      DNI: ${dni}<br/>
-      </p>
+      DNI: ${dni}<br/></p>
     `
   });
 };
