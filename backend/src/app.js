@@ -24,7 +24,8 @@ app.use('/usuario',require('./routes/usuario.routes'));
 app.use('/login',require('./routes/login.routes'));
 app.use('/reserva',require('./routes/reserva.routes'));
 app.use('/platos',require('./routes/plato.routes'));
-app.use('/pedidos',require('./routes/pedido.routes'))
+app.use('/pedidos',require('./routes/pedido.routes'));
+app.use('/pagos',require('./routes/detallePago.routes'));
 
 //middlewares de errores
 
