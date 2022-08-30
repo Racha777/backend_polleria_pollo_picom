@@ -1,7 +1,7 @@
 const usuarioController = {}
 
 const usuarioModel = require('../models/usuario.models');
-const passwordRecoveryEmail = require('../helpers/email')
+const {passwordRecoveryEmail} = require('../helpers/email')
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -29,7 +29,6 @@ usuarioController.create = async (req,res)=>{
         const {usuario,password,correo} = req.body
 
         passwordEncriptado = await bcrypt.hash(password,10);
-        console.log("password encriptado : " + passwordEncriptado)
 
         let data ={
             usuario:usuario,
@@ -105,7 +104,6 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         const user = await usuarioModel.findOne({ correo });
         if (user) {
           const { usuario, correo, _id } = user;
-          console.log(correo)
           passwordRecoveryEmail({
             usuario,
             correo,
@@ -117,7 +115,7 @@ usuarioController.userRecoverPassword = async(req,res)=>{
         }
 
         else {
-          const error = new Error('Correo inválido');
+          const error = new Error('Email inválido');
           return res.status(400).json({
             message: error.message
           });
@@ -130,9 +128,7 @@ usuarioController.userNewPassword = async (req, res) => {
     try {
       const {id} = req.params;
       if(mongoose.Types.ObjectId.isValid(id)) {
-        console.log('valido')
         const user = await usuarioModel.findById(id);
-         console.log(user)
         const { password } = req.body;
 
         if (user!==null) {
