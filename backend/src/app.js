@@ -27,6 +27,7 @@ app.use('/contacto',require('./routes/contacto.routes'));
 app.use('/reclamo',require('./routes/reclamo.routes'));
 app.use('/platos',require('./routes/plato.routes'));
 app.use('/pedidos',require('./routes/pedido.routes'));
+app.use('/pagos',require('./routes/detallePago.routes'));
 
 //middlewares de errores
 
