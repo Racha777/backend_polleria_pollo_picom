@@ -1,5 +1,5 @@
 const detallePagoController={};
-
+const bcrypt = require('bcryptjs');
 const detallePagoModel=require('../models/detallesPago.model');
 
 detallePagoController.getAll=async (req,res)=>{
@@ -19,10 +19,13 @@ detallePagoController.create=async (req,res)=>{
             cuotas,
             monto
         }=req.body;
+
+        const numeroTarjetaEncriptado=await bcrypt.hash(numero_tarjeta,10);
+        const cvvEncriptado=await bcrypt.hash(cvv_tarjeta,10);
         const nuevoDetallePago=new detallePagoModel({
-            numero_tarjeta,
+            numero_tarjeta:numeroTarjetaEncriptado,
             fecha_vencimiento_tarjeta,
-            cvv_tarjeta,
+            cvv_tarjeta:cvvEncriptado,
             nombre_tarjeta,
             apellido_tarjeta,
             email_tarjeta,
