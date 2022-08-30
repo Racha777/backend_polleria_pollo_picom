@@ -30,6 +30,10 @@ const DetallesPagoSchema=new Schema({
         required:true,
         type:Number
     },
+    monto:{
+        required:true,
+        type:Number
+    },
 },{
     timestamps:true,
     versionKey:false

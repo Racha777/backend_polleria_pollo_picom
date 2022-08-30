@@ -16,7 +16,8 @@ detallePagoController.create=async (req,res)=>{
             nombre_tarjeta,
             apellido_tarjeta,
             email_tarjeta,
-            cuotas
+            cuotas,
+            monto
         }=req.body;
         const nuevoDetallePago=new detallePagoModel({
             numero_tarjeta,
@@ -25,7 +26,8 @@ detallePagoController.create=async (req,res)=>{
             nombre_tarjeta,
             apellido_tarjeta,
             email_tarjeta,
-            cuotas
+            cuotas,
+            monto
         });
         await nuevoDetallePago.save();
         res.json(nuevoDetallePago);
