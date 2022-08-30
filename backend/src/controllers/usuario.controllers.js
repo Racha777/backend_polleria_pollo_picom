@@ -29,7 +29,6 @@ usuarioController.create = async (req,res)=>{
         const {usuario,password,correo} = req.body
 
         passwordEncriptado = await bcrypt.hash(password,10);
-        console.log("password encriptado : " + passwordEncriptado)
 
         let data ={
             usuario:usuario,

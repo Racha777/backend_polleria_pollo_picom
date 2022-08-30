@@ -15,7 +15,6 @@ reservaController.getAll = async (req,res) =>{
 reservaController.create = async (req,res) =>{
     
     try{
-    console.log(req.body)
      const nuevaReserva = new reservaModel(req.body)
      await nuevaReserva.save();
      res.json({
