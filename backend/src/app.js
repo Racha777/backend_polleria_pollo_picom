@@ -23,6 +23,8 @@ app.get('/',(req,res)=>{
 app.use('/usuario',require('./routes/usuario.routes'));
 app.use('/login',require('./routes/login.routes'));
 app.use('/reserva',require('./routes/reserva.routes'));
+app.use('/contacto',require('./routes/contacto.routes'));
+app.use('/reclamo',require('./routes/reclamo.routes'));
 app.use('/platos',require('./routes/plato.routes'));
 app.use('/pedidos',require('./routes/pedido.routes'));
 
