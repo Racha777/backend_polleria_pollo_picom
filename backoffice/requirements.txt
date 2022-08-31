@@ -1,0 +1,5 @@
+django==3.2
+djongo
+sqlparse==0.2.4
+pymongo[srv]
+django-cors-headers
